@@ -4,7 +4,10 @@
 <ul>
   {% for course in courses %}
   <li>
-    <a href="{% url 'pdf_list' course_id=course.id %}">{{ course.title }}</a>
+    <a
+      href="{% url 'pdf_list' class_id=course.my_class.id course_id=course.id %}"
+      >{{ course.title }}</a
+    >
   </li>
   {% endfor %}
 </ul>
