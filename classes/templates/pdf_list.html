@@ -1,4 +1,4 @@
-<!-- templates/pdf_list.html -->
+<!-- pdf_list.html -->
 
 <h2>PDF Files</h2>
 <ul>
@@ -8,3 +8,13 @@
   </li>
   {% endfor %}
 </ul>
+
+<h2>Upload PDF File</h2>
+<form
+  method="post"
+  enctype="multipart/form-data"
+  action="{% url 'upload_pdf_file' class_id=class_id course_id=course_id %}"
+>
+  {% csrf_token %} {{ form.as_p }}
+  <button type="submit">Upload</button>
+</form>

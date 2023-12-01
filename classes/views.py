@@ -31,16 +31,25 @@ class PDFFileListView(ListView):
         course_id = self.kwargs['course_id']
         return PDFFile.objects.filter(course__id=course_id)
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        class_id = self.kwargs['class_id']
+        course_id = self.kwargs['course_id']
+        context['class_id'] = class_id
+        context['course_id'] = course_id
+        context['form'] = PDFFileForm(initial={'course': course_id})
+        return context
+
 class UploadPDFFileView(View):
     template_name = 'upload_pdf_file.html'
 
-    def get(self, request, course_id):
+    def get(self, request, class_id, course_id):
         form = PDFFileForm(initial={'course': course_id})
-        return render(request, self.template_name, {'form': form})
+        return render(request, self.template_name, {'form': form, 'class_id': class_id, 'course_id': course_id})
 
-    def post(self, request, course_id):
+    def post(self, request, class_id, course_id):
         form = PDFFileForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('pdf_list', course_id=course_id)
-        return render(request, self.template_name, {'form': form})
+            return redirect('pdf_list', class_id=class_id, course_id=course_id)
+        return render(request, self.template_name, {'form': form, 'class_id': class_id, 'course_id': course_id})    
