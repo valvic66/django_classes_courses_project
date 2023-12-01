@@ -1,13 +1,16 @@
 <!-- templates/course_list.html -->
-
-<h2>Courses</h2>
-<ul>
-  {% for course in courses %}
-  <li>
-    <a
-      href="{% url 'pdf_list' class_id=course.my_class.id course_id=course.id %}"
-      >{{ course.title }}</a
-    >
-  </li>
-  {% endfor %}
-</ul>
+{% extends 'base.html' %} {% block container %}
+<div class="classes__courselist">
+  <h2>Courses</h2>
+  <ul>
+    {% for course in courses %}
+    <li>
+      <a
+        href="{% url 'pdf_list' class_id=course.my_class.id course_id=course.id %}"
+        >{{ course.title }}</a
+      >
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}

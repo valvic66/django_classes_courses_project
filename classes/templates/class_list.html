@@ -1,12 +1,15 @@
 <!-- templates/class_list.html -->
-
-<h2>Classes</h2>
-<ul>
-  {% for my_class in classes %}
-  <li>
-    <a href="{% url 'course_list' class_id=my_class.id %}"
-      >{{ my_class.name }}</a
-    >
-  </li>
-  {% endfor %}
-</ul>
+{% extends 'base.html' %} {% block container %}
+<div class="classes__classlist">
+  <h2>Classes</h2>
+  <ul>
+    {% for my_class in classes %}
+    <li>
+      <a href="{% url 'course_list' class_id=my_class.id %}"
+        >{{ my_class.name }}</a
+      >
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}

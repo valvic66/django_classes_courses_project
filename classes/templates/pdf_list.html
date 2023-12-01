@@ -1,20 +1,19 @@
-<!-- pdf_list.html -->
+{% extends 'base.html' %} {% block container %}
+<div class="classes__pdflist">
+  <h2>PDF Files</h2>
+  <ul>
+    {% for pdf_file in pdf_files %}
+    <li>
+      <a href="{{ pdf_file.file.url }}" target="_blank">{{ pdf_file.title }}</a>
+    </li>
+    {% endfor %}
+  </ul>
 
-<h2>PDF Files</h2>
-<ul>
-  {% for pdf_file in pdf_files %}
-  <li>
-    <a href="{{ pdf_file.file.url }}" target="_blank">{{ pdf_file.title }}</a>
-  </li>
-  {% endfor %}
-</ul>
-
-<h2>Upload PDF File</h2>
-<form
-  method="post"
-  enctype="multipart/form-data"
-  action="{% url 'upload_pdf_file' class_id=class_id course_id=course_id %}"
->
-  {% csrf_token %} {{ form.as_p }}
-  <button type="submit">Upload</button>
-</form>
+  <h2>Upload PDF File</h2>
+  <p>
+    <a href="{% url 'upload_pdf_file' class_id=class_id course_id=course_id %}"
+      >Upload a PDF file</a
+    >
+  </p>
+</div>
+{% endblock %}
