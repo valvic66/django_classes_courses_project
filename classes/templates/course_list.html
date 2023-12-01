@@ -1,0 +1,10 @@
+<!-- templates/course_list.html -->
+
+<h2>Courses</h2>
+<ul>
+  {% for course in courses %}
+  <li>
+    <a href="{% url 'pdf_list' course_id=course.id %}">{{ course.title }}</a>
+  </li>
+  {% endfor %}
+</ul>

@@ -1,0 +1,10 @@
+<!-- templates/pdf_list.html -->
+
+<h2>PDF Files</h2>
+<ul>
+  {% for pdf_file in pdf_files %}
+  <li>
+    <a href="{{ pdf_file.file.url }}" target="_blank">{{ pdf_file.title }}</a>
+  </li>
+  {% endfor %}
+</ul>
