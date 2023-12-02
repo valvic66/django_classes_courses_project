@@ -10,6 +10,13 @@
         >{{ course.title }}</a
       >
     </li>
+    <form
+      method="post"
+      action="{% url 'delete_course' class_id=class_id course_id=course.id %}"
+    >
+      {% csrf_token %}
+      <button type="submit">Remove Course</button>
+    </form>
     {% endfor %}
   </ul>
 </div>

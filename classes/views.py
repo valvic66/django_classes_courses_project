@@ -80,6 +80,22 @@ class AddCourseView(View):
             form.save()
             return redirect('course_list', class_id=class_id)  # Change this to the appropriate URL name
         return render(request, self.template_name, {'form': form, 'class_id': class_id})
+    
+class DeleteCourseView(View):
+    def post(self, request, class_id, course_id):
+        course = get_object_or_404(Course, id=course_id)
+
+        # Delete associated PDF files
+        pdf_files = PDFFile.objects.filter(course=course)
+        for pdf_file in pdf_files:
+            # Delete the file from the server
+            pdf_file.file.delete(save=False)
+
+        # Now, delete the course
+        course.delete()
+
+        # Redirect to the course list page or any other appropriate page
+        return redirect('course_list', class_id=class_id)  # Change this to the appropriate URL name
 
 class PDFFileListView(ListView):
     model = PDFFile
