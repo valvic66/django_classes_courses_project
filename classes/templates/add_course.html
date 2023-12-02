@@ -1,0 +1,9 @@
+<!-- add_course.html -->
+<h2>Add New Course</h2>
+
+<form method="post" action="{% url 'add_course' class_id %}">
+  {% csrf_token %} {{ form.as_p }}
+  <button type="submit">Add Course</button>
+</form>
+
+<a href="{% url 'course_list' class_id %}">Back to Course List</a>
