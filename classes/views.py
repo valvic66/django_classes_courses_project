@@ -3,7 +3,7 @@
 from django.views.generic import ListView
 from .models import MyClass, Course, PDFFile
 
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from .models import PDFFile
 from .forms import PDFFileForm, AddClassForm, AddCourse
@@ -32,6 +32,25 @@ class AddClassView(View):
             form.save()
             return redirect('class_list')  # Change this to the appropriate URL name
         return render(request, self.template_name, {'form': form})
+    
+class DeleteClassView(View):
+    def post(self, request, class_id):
+        my_class = get_object_or_404(MyClass, id=class_id)
+
+        # Delete associated courses and PDF files
+        courses = Course.objects.filter(my_class=my_class)
+        for course in courses:
+            pdf_files = PDFFile.objects.filter(course=course)
+            for pdf_file in pdf_files:
+                # Delete the file from the server
+                pdf_file.file.delete(save=False)
+            course.delete()
+
+        # Now, delete the class
+        my_class.delete()
+
+        # Redirect to the classes page or any other appropriate page
+        return redirect('class_list')  # Change this to the appropriate URL name
 
 class CourseListView(ListView):
     model = Course
