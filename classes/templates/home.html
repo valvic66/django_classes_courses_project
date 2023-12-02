@@ -1,0 +1,49 @@
+<!-- home.html -->
+
+<style>
+  header.home__header,
+  section.home__section {
+    padding: 10px;
+  }
+
+  footer.home__footer {
+    color: #333; /* Dark text color */
+    padding: 5px;
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+  }
+
+  .home__footer p {
+    font-size: small;
+  }
+</style>
+
+{% extends 'base.html' %} {% block container %}
+<header class="home__header">
+  <h1>Bine ați venit pe Pagina de Matematică!</h1>
+</header>
+
+<section class="home__section">
+  <p>
+    Matematica este o disciplină fundamentală care explorează modele abstracte
+    și structuri, utilizând raționamentul logic și calculele precise. Ea este
+    adesea considerată "limbajul natural al științei" datorită aplicabilității
+    sale într-o gamă largă de domenii, inclusiv fizică, informatică, economie și
+    multe altele.
+  </p>
+
+  <p>
+    Această pagină vă oferă informații și resurse legate de matematică, inclusiv
+    concepte de bază, teoreme celebre și aplicații practice. Indiferent dacă
+    sunteți începător sau expert, sperăm să găsiți informații utile și
+    interesante.
+  </p>
+</section>
+
+<footer class="home__footer">
+  <p>&copy; 2023 Munteanu Adrian. All Rights Reserved.</p>
+</footer>
+
+{% endblock %}

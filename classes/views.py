@@ -8,6 +8,12 @@ from django.views import View
 from .models import PDFFile
 from .forms import PDFFileForm
 
+class HomeView(ListView):
+    template_name = 'home.html'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name)
+
 class MyClassListView(ListView):
     model = MyClass
     template_name = 'class_list.html'
