@@ -115,6 +115,19 @@ class PDFFileListView(ListView):
         context['form'] = PDFFileForm(initial={'course': course_id})
         return context
 
+class DeletePDFFileView(View):
+    def post(self, request, class_id, course_id, pdf_id):
+        pdf_file = get_object_or_404(PDFFile, id=pdf_id)
+
+        # Delete the file from the server
+        pdf_file.file.delete(save=False)
+
+        # Now, delete the PDF file record
+        pdf_file.delete()
+
+        # Redirect to the PDF list page or any other appropriate page
+        return redirect('pdf_list', class_id=class_id, course_id=course_id)    
+
 class UploadPDFFileView(View):
     template_name = 'upload_pdf_file.html'
 

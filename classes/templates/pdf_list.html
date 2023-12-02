@@ -6,6 +6,13 @@
     <li>
       <a href="{{ pdf_file.file.url }}" target="_blank">{{ pdf_file.title }}</a>
     </li>
+    <form
+      method="post"
+      action="{% url 'delete_pdf_file' class_id=class_id course_id=course_id pdf_id=pdf_file.id %}"
+    >
+      {% csrf_token %}
+      <button type="submit">Remove PDF</button>
+    </form>
     {% endfor %}
   </ul>
 
