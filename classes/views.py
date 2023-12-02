@@ -6,7 +6,7 @@ from .models import MyClass, Course, PDFFile
 from django.shortcuts import render, redirect
 from django.views import View
 from .models import PDFFile
-from .forms import PDFFileForm
+from .forms import PDFFileForm, AddClassForm
 
 class HomeView(ListView):
     template_name = 'home.html'
@@ -18,6 +18,20 @@ class MyClassListView(ListView):
     model = MyClass
     template_name = 'class_list.html'
     context_object_name = 'classes'
+
+class AddClassView(View):
+    template_name = 'add_class.html'
+
+    def get(self, request):
+        form = AddClassForm()
+        return render(request, self.template_name, {'form': form})
+
+    def post(self, request):
+        form = AddClassForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('class_list')  # Change this to the appropriate URL name
+        return render(request, self.template_name, {'form': form})
 
 class CourseListView(ListView):
     model = Course
