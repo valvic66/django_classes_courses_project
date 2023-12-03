@@ -1,26 +1,47 @@
 <!-- templates/course_list.html -->
 {% extends 'base.html' %} {% block container %}
+<style>
+  .course__container {
+    display: flex;
+    align-items: baseline; /* Align items based on their baseline */
+    gap: 10px; /* Adjust the spacing between class title and delete form */
+  }
+
+  .delete-form {
+    margin-right: 10px; /* Add some additional spacing if needed */
+  }
+
+  .course__item {
+    list-style-type: none;
+  }
+</style>
+
 <div class="classes__courselist">
   <h2>Courses</h2>
   <ul>
     {% for course in courses %}
-    <li>
-      <a
-        href="{% url 'pdf_list' class_id=course.my_class.id course_id=course.id %}"
-        >{{ course.title }}</a
+    <div class="course__container">
+      <li class="course__item">
+        <a
+          href="{% url 'pdf_list' class_id=course.my_class.id course_id=course.id %}"
+          >{{ course.title }}</a
+        >
+      </li>
+      <form
+        method="post"
+        action="{% url 'delete_course' class_id=class_id course_id=course.id %}"
+        class="delete-form"
       >
-    </li>
-    <form
-      method="post"
-      action="{% url 'delete_course' class_id=class_id course_id=course.id %}"
-    >
-      {% csrf_token %}
-      <button type="submit">Remove Course</button>
-    </form>
+        {% csrf_token %}
+        <button type="submit" class="btn btn-outline-primary btn-sm">
+          Delete
+        </button>
+      </form>
+    </div>
     {% endfor %}
   </ul>
 </div>
 <a href="{% url 'add_course' class_id=class_id %}">
-  <button>Add New Course</button>
+  <button class="btn btn-primary btn-sm">Add New Course</button>
 </a>
 {% endblock %}

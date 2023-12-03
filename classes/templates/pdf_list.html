@@ -1,22 +1,44 @@
 {% extends 'base.html' %} {% block container %}
+<style>
+  .pdf__container {
+    display: flex;
+    align-items: baseline; /* Align items based on their baseline */
+    gap: 10px; /* Adjust the spacing between class title and delete form */
+  }
+
+  .delete-form {
+    margin-right: 10px; /* Add some additional spacing if needed */
+  }
+
+  .class__item {
+    list-style-type: none;
+  }
+</style>
+
 <div class="classes__pdflist">
   <h2>PDF Files</h2>
   <ul>
     {% for pdf_file in pdf_files %}
-    <li>
-      <a href="{{ pdf_file.file.url }}" target="_blank">{{ pdf_file.title }}</a>
-    </li>
-    <form
-      method="post"
-      action="{% url 'delete_pdf_file' class_id=class_id course_id=course_id pdf_id=pdf_file.id %}"
-    >
-      {% csrf_token %}
-      <button type="submit">Remove PDF</button>
-    </form>
+    <div class="pdf__container">
+      <li class="pdf__item">
+        <a href="{{ pdf_file.file.url }}" target="_blank"
+          >{{ pdf_file.title }}</a
+        >
+      </li>
+      <form
+        method="post"
+        action="{% url 'delete_pdf_file' class_id=class_id course_id=course_id pdf_id=pdf_file.id %}"
+        class="delete-form"
+      >
+        {% csrf_token %}
+        <button type="submit" class="btn btn-outline-primary btn-sm">
+          Remove
+        </button>
+      </form>
+    </div>
     {% endfor %}
   </ul>
 
-  <h2>Upload PDF File</h2>
   <p>
     <a href="{% url 'upload_pdf_file' class_id=class_id course_id=course_id %}"
       >Upload a PDF file</a

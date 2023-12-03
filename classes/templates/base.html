@@ -13,6 +13,11 @@
       crossorigin="anonymous"
     />
   </head>
+  <style>
+    .classes__container {
+      padding: 10px;
+    }
+  </style>
   <body>
     {% block navbar %} {% include "navbar.html" %} {% endblock %}
     <div class="classes__container">{% block container %}{% endblock %}</div>

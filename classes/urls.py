@@ -4,7 +4,7 @@ from django.urls import path
 from .views import MyClassListView, CourseListView, PDFFileListView, UploadPDFFileView, HomeView, AddClassView, AddCourseView, DeleteClassView, DeleteCourseView, DeletePDFFileView
 
 urlpatterns = [
-    path('home', HomeView.as_view(), name='home_view'),
+    path('', HomeView.as_view(), name='home_view'),
     path('class/all_classes', MyClassListView.as_view(), name='class_list'),
     path('class/add_class', AddClassView.as_view(), name='add_class'),
     path('class/<int:class_id>/delete/', DeleteClassView.as_view(), name='delete_class'),

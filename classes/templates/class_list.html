@@ -1,18 +1,42 @@
 <!-- templates/class_list.html -->
+<style>
+  .class__container {
+    display: flex;
+    align-items: baseline; /* Align items based on their baseline */
+    gap: 10px; /* Adjust the spacing between class title and delete form */
+  }
+
+  .delete-form {
+    margin-right: 10px; /* Add some additional spacing if needed */
+  }
+
+  .class__item {
+    list-style-type: none;
+  }
+</style>
+
 {% extends 'base.html' %} {% block container %}
 <div class="classes__classlist">
   <h2>Classes</h2>
   <ul>
     {% for my_class in classes %}
-    <li>
-      <a href="{% url 'course_list' class_id=my_class.id %}"
-        >{{ my_class.name }}</a
+    <div class="class__container">
+      <li class="class__item">
+        <a href="{% url 'course_list' class_id=my_class.id %}"
+          >{{ my_class.name }}</a
+        >
+      </li>
+      <form
+        method="post"
+        action="{% url 'delete_class' class_id=my_class.id %}"
+        class="delete-form"
       >
-    </li>
-    <form method="post" action="{% url 'delete_class' class_id=my_class.id %}">
-      {% csrf_token %}
-      <button type="submit">Delete Class</button>
-    </form>
+        {% csrf_token %}
+        <button type="submit" class="btn btn-outline-primary btn-sm">
+          Delete
+        </button>
+      </form>
+    </div>
     {% endfor %}
   </ul>
 </div>

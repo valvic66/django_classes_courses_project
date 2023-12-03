@@ -3,7 +3,7 @@
 <h2>Add a New Class</h2>
 <form method="post" action="{% url 'add_class' %}">
   {% csrf_token %} {{ form.as_p }}
-  <button type="submit" class="btn btn-primary">Add Class</button>
+  <button type="submit" class="btn btn-primary btn-sm">Add Class</button>
 </form>
 
 {% endblock %}
