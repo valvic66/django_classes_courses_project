@@ -1,14 +1,13 @@
-<!-- templates/course_list.html -->
 {% extends 'base.html' %} {% block container %}
 <style>
   .course__container {
     display: flex;
-    align-items: baseline; /* Align items based on their baseline */
-    gap: 10px; /* Adjust the spacing between class title and delete form */
+    align-items: baseline;
+    gap: 10px;
   }
 
   .delete-form {
-    margin-right: 10px; /* Add some additional spacing if needed */
+    margin-right: 10px;
   }
 
   .course__item {
@@ -17,7 +16,17 @@
 </style>
 
 <div class="classes__courselist">
-  <h2>Courses</h2>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="{% url 'class_list' %}">Classes</a>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">
+        {{ class_name }}
+      </li>
+    </ol>
+  </nav>
+  <h3>Courses</h3>
   <ul>
     {% for course in courses %}
     <div class="course__container">
@@ -41,7 +50,7 @@
     {% endfor %}
   </ul>
 </div>
-<a href="{% url 'add_course' class_id=class_id %}">
-  <button class="btn btn-primary btn-sm">Add New Course</button>
-</a>
+<form method="get" action="{% url 'add_course' class_id=class_id %}">
+  <button type="submit" class="btn btn-primary btn-sm">Add New Course</button>
+</form>
 {% endblock %}

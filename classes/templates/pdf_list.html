@@ -16,7 +16,23 @@
 </style>
 
 <div class="classes__pdflist">
-  <h2>PDF Files</h2>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="{% url 'class_list' %}">Classes</a>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">
+        {{ class_name}}
+      </li>
+      <li class="breadcrumb-item">
+        <a href="{% url 'course_list' class_id=class_id %}">Courses</a>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">
+        {{ course_title}}
+      </li>
+    </ol>
+  </nav>
+  <h3>PDF Files</h3>
   <ul>
     {% for pdf_file in pdf_files %}
     <div class="pdf__container">

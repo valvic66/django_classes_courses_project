@@ -65,6 +65,7 @@ class CourseListView(ListView):
         context = super().get_context_data(**kwargs)
         class_id = self.kwargs['class_id']
         context['class_id'] = class_id
+        context['class_name'] = MyClass.objects.get(id=class_id).name
         return context
     
 class AddCourseView(View):
@@ -111,7 +112,9 @@ class PDFFileListView(ListView):
         class_id = self.kwargs['class_id']
         course_id = self.kwargs['course_id']
         context['class_id'] = class_id
+        context['class_name'] = MyClass.objects.get(id=class_id).name
         context['course_id'] = course_id
+        context['course_title'] = Course.objects.get(id=course_id).title
         context['form'] = PDFFileForm(initial={'course': course_id})
         return context
 
