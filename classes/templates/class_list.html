@@ -1,13 +1,16 @@
 <!-- templates/class_list.html -->
+
 <style>
   .class__container {
     display: flex;
-    align-items: baseline; /* Align items based on their baseline */
-    gap: 10px; /* Adjust the spacing between class title and delete form */
+    align-items: baseline;
+    gap: 10px;
+    width: 100%;
   }
 
   .delete-form {
-    margin-right: 10px; /* Add some additional spacing if needed */
+    margin-bottom: 0;
+    text-align: right;
   }
 
   .class__item {
@@ -17,28 +20,51 @@
 
 {% extends 'base.html' %} {% block container %}
 <div class="classes__classlist">
-  <h3>Classes</h3>
-  <ul>
-    {% for my_class in classes %}
-    <div class="class__container">
-      <li class="class__item">
-        <a href="{% url 'course_list' class_id=my_class.id %}"
-          >{{ my_class.name }}</a
-        >
-      </li>
-      <form
-        method="post"
-        action="{% url 'delete_class' class_id=my_class.id %}"
-        class="delete-form"
-      >
-        {% csrf_token %}
-        <button type="submit" class="btn btn-outline-primary btn-sm">
-          Delete
-        </button>
-      </form>
-    </div>
-    {% endfor %}
-  </ul>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Class name</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for my_class in classes %}
+      <tr>
+        <td>
+          <li class="class__item">
+            <a href="{% url 'course_list' class_id=my_class.id %}"
+              >{{ my_class.name }}</a
+            >
+          </li>
+        </td>
+        <td>
+          <form
+            method="post"
+            action="{% url 'delete_class' class_id=my_class.id %}"
+            class="delete-form"
+          >
+            {% csrf_token %}
+            <button
+              type="submit"
+              style="outline: 0; border: 0; background-color: transparent"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="18"
+                width="16"
+                viewBox="0 0 448 512"
+              >
+                <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.-->
+                <path
+                  d="M64 80c-8.8 0-16 7.2-16 16V416c0 8.8 7.2 16 16 16H384c8.8 0 16-7.2 16-16V96c0-8.8-7.2-16-16-16H64zM0 96C0 60.7 28.7 32 64 32H384c35.3 0 64 28.7 64 64V416c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V96zM152 232H296c13.3 0 24 10.7 24 24s-10.7 24-24 24H152c-13.3 0-24-10.7-24-24s10.7-24 24-24z"
+                />
+              </svg>
+            </button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 </div>
 
 <a href="{% url 'add_class' %}">Add New Class</a>
