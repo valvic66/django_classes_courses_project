@@ -19,6 +19,9 @@ class MyClassListView(ListView):
     template_name = 'class_list.html'
     context_object_name = 'classes'
 
+    def get_queryset(self):
+        return MyClass.objects.order_by('-created_at')
+
 class AddClassView(View):
     template_name = 'add_class.html'
 
@@ -59,7 +62,7 @@ class CourseListView(ListView):
 
     def get_queryset(self):
         class_id = self.kwargs['class_id']
-        return Course.objects.filter(my_class__id=class_id)
+        return Course.objects.filter(my_class__id=class_id).order_by('-created_at')
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -105,7 +108,7 @@ class PDFFileListView(ListView):
 
     def get_queryset(self):
         course_id = self.kwargs['course_id']
-        return PDFFile.objects.filter(course__id=course_id)
+        return PDFFile.objects.filter(course__id=course_id).order_by('-created_at')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
