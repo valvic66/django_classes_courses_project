@@ -4,14 +4,19 @@
     display: flex;
     align-items: baseline;
     gap: 10px;
+    width: 100%;
   }
 
   .delete-form {
-    margin-right: 10px;
+    margin-bottom: 0;
+    text-align: right;
   }
 
   .course__item {
     list-style-type: none;
+  }
+
+  .breadcrumb {
   }
 </style>
 
@@ -26,31 +31,54 @@
       </li>
     </ol>
   </nav>
-  <h3>Courses</h3>
-  <ul>
-    {% for course in courses %}
-    <div class="course__container">
-      <li class="course__item">
-        <a
-          href="{% url 'pdf_list' class_id=course.my_class.id course_id=course.id %}"
-          >{{ course.title }}</a
-        >
-      </li>
-      <form
-        method="post"
-        action="{% url 'delete_course' class_id=class_id course_id=course.id %}"
-        class="delete-form"
-      >
-        {% csrf_token %}
-        <button type="submit" class="btn btn-outline-primary btn-sm">
-          Delete
-        </button>
-      </form>
-    </div>
-    {% endfor %}
-  </ul>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Course name</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for course in courses %}
+      <tr>
+        <td>
+          <li class="course__item">
+            <a
+              href="{% url 'pdf_list' class_id=course.my_class.id course_id=course.id %}"
+              >{{ course.title }}</a
+            >
+          </li>
+        </td>
+        <td>
+          <form
+            method="post"
+            action="{% url 'delete_course' class_id=class_id course_id=course.id %}"
+            class="delete-form"
+          >
+            {% csrf_token %}
+            <button
+              type="submit"
+              style="outline: 0; border: 0; background-color: transparent"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="18"
+                width="16"
+                viewBox="0 0 448 512"
+              >
+                <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.-->
+                <path
+                  d="M64 80c-8.8 0-16 7.2-16 16V416c0 8.8 7.2 16 16 16H384c8.8 0 16-7.2 16-16V96c0-8.8-7.2-16-16-16H64zM0 96C0 60.7 28.7 32 64 32H384c35.3 0 64 28.7 64 64V416c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V96zM152 232H296c13.3 0 24 10.7 24 24s-10.7 24-24 24H152c-13.3 0-24-10.7-24-24s10.7-24 24-24z"
+                />
+              </svg>
+            </button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 </div>
 <form method="get" action="{% url 'add_course' class_id=class_id %}">
-  <button type="submit" class="btn btn-primary btn-sm">Add New Course</button>
+  <button type="submit" class="btn btn-primary btn-sm">Add Course</button>
 </form>
 {% endblock %}

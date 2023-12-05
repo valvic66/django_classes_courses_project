@@ -67,5 +67,7 @@
   </table>
 </div>
 
-<a href="{% url 'add_class' %}">Add New Class</a>
+<form method="get" action="{% url 'add_class' %}">
+  <button type="submit" class="btn btn-primary btn-sm">Add Class</button>
+</form>
 {% endblock %}

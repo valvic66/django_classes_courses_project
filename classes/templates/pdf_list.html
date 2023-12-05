@@ -8,9 +8,10 @@
 
   .delete-form {
     margin-right: 10px; /* Add some additional spacing if needed */
+    text-align: right;
   }
 
-  .class__item {
+  .pdf__item {
     list-style-type: none;
   }
 </style>
@@ -32,33 +33,56 @@
       </li>
     </ol>
   </nav>
-  <h3>PDF Files</h3>
-  <ul>
-    {% for pdf_file in pdf_files %}
-    <div class="pdf__container">
-      <li class="pdf__item">
-        <a href="{{ pdf_file.file.url }}" target="_blank"
-          >{{ pdf_file.title }}</a
-        >
-      </li>
-      <form
-        method="post"
-        action="{% url 'delete_pdf_file' class_id=class_id course_id=course_id pdf_id=pdf_file.id %}"
-        class="delete-form"
-      >
-        {% csrf_token %}
-        <button type="submit" class="btn btn-outline-primary btn-sm">
-          Remove
-        </button>
-      </form>
-    </div>
-    {% endfor %}
-  </ul>
-
-  <p>
-    <a href="{% url 'upload_pdf_file' class_id=class_id course_id=course_id %}"
-      >Upload a PDF file</a
-    >
-  </p>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">PDF file</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for pdf_file in pdf_files %}
+      <tr>
+        <td>
+          <li class="pdf__item">
+            <a href="{{ pdf_file.file.url }}" target="_blank"
+              >{{ pdf_file.title }}</a
+            >
+          </li>
+        </td>
+        <td>
+          <form
+            method="post"
+            action="{% url 'delete_pdf_file' class_id=class_id course_id=course_id pdf_id=pdf_file.id %}"
+            class="delete-form"
+          >
+            {% csrf_token %}
+            <button
+              type="submit"
+              style="outline: 0; border: 0; background-color: transparent"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="18"
+                width="16"
+                viewBox="0 0 448 512"
+              >
+                <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.-->
+                <path
+                  d="M64 80c-8.8 0-16 7.2-16 16V416c0 8.8 7.2 16 16 16H384c8.8 0 16-7.2 16-16V96c0-8.8-7.2-16-16-16H64zM0 96C0 60.7 28.7 32 64 32H384c35.3 0 64 28.7 64 64V416c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V96zM152 232H296c13.3 0 24 10.7 24 24s-10.7 24-24 24H152c-13.3 0-24-10.7-24-24s10.7-24 24-24z"
+                />
+              </svg>
+            </button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 </div>
+<form
+  method="get"
+  action="{% url 'upload_pdf_file' class_id=class_id course_id=course_id %}"
+>
+  <button type="submit" class="btn btn-primary btn-sm">Upload PDF</button>
+</form>
 {% endblock %}
