@@ -1,5 +1,4 @@
 <!-- home.html -->
-
 <style>
   header.home__header,
   section.home__section {
@@ -10,35 +9,66 @@
     color: #333; /* Dark text color */
     padding: 5px;
     text-align: center;
-    position: absolute;
-    bottom: 0;
+    /* position: absolute; */
+    /* bottom: 0; */
     width: 100%;
   }
 
   .home__footer p {
     font-size: small;
   }
+
+  .math-overview {
+    max-width: 100%;
+    margin: 0 auto;
+    margin-bottom: 10px;
+  }
+
+  @media (min-width: 768px) {
+    .math-overview {
+      max-width: 600px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+
+  .home__header {
+    text-align: center;
+  }
 </style>
 
-{% extends 'base.html' %} {% block container %}
+{% extends 'base.html' %} {% block container %} {% load static %}
+
 <header class="home__header">
-  <h1>Bine ați venit pe Pagina de Matematică!</h1>
+  <h2 class="home__header">Bine ați venit pe Pagina mea de Matematică!</h2>
 </header>
 
 <section class="home__section">
-  <p>
-    Matematica este o disciplină fundamentală care explorează modele abstracte
-    și structuri, utilizând raționamentul logic și calculele precise. Ea este
-    adesea considerată "limbajul natural al științei" datorită aplicabilității
-    sale într-o gamă largă de domenii, inclusiv fizică, informatică, economie și
-    multe altele.
+  <img
+    src="{% static '/images/matematica_overview.jpg' %}"
+    alt="Matematica overview"
+    class="math-overview"
+  />
+  <p class="justified-text">
+    Această pagină vă oferă informații și resurse bogate legate de matematică,
+    acoperind o varietate de subiecte precum concepte de bază, teoreme celebre
+    și aplicații practice. Indiferent dacă sunteți începător sau expert, sperăm
+    să găsiți aceste informații utile și interesante.
   </p>
 
-  <p>
-    Această pagină vă oferă informații și resurse legate de matematică, inclusiv
-    concepte de bază, teoreme celebre și aplicații practice. Indiferent dacă
-    sunteți începător sau expert, sperăm să găsiți informații utile și
-    interesante.
+  <p class="justified-text">
+    Matematica este limbajul universal al științei și al logicii, oferind un
+    cadru solid pentru înțelegerea lumii înconjurătoare. De la algebră și
+    geometrie la analiză matematică și teoria numerelor, această pagină vă
+    propune să explorați diverse aspecte ale matematicii.
+  </p>
+
+  <p class="justified-text">
+    Indiferent dacă vă interesează probleme practice, cum ar fi calculul
+    financiar sau modelarea matematică în știință, sau sunteți pasionat de
+    teoreme abstracte și concepte avansate, veți găsi aici resurse care să vă
+    stimuleze curiozitatea și să vă ajute să aprofundați cunoștințele.
   </p>
 </section>
 
