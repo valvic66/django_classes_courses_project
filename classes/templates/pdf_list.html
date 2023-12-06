@@ -20,13 +20,13 @@
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item">
-        <a href="{% url 'class_list' %}">Classes</a>
+        <a href="{% url 'class_list' %}">Clase</a>
       </li>
       <li class="breadcrumb-item active" aria-current="page">
         {{ class_name}}
       </li>
       <li class="breadcrumb-item">
-        <a href="{% url 'course_list' class_id=class_id %}">Courses</a>
+        <a href="{% url 'course_list' class_id=class_id %}">Cursuri</a>
       </li>
       <li class="breadcrumb-item active" aria-current="page">
         {{ course_title}}
@@ -36,7 +36,7 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <th scope="col">PDF file</th>
+        <th scope="col">Fisiere PDF</th>
       </tr>
     </thead>
     <tbody>
@@ -83,6 +83,6 @@
   method="get"
   action="{% url 'upload_pdf_file' class_id=class_id course_id=course_id %}"
 >
-  <button type="submit" class="btn btn-primary btn-sm">Upload PDF</button>
+  <button type="submit" class="btn btn-primary btn-sm">Incarca PDF</button>
 </form>
 {% endblock %}

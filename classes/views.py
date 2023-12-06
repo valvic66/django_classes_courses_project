@@ -82,7 +82,8 @@ class AddCourseView(View):
         form = AddCourse(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('course_list', class_id=class_id)  # Change this to the appropriate URL name
+            return redirect('course_list', class_id=class_id)
+        
         return render(request, self.template_name, {'form': form, 'class_id': class_id})
     
 class DeleteCourseView(View):

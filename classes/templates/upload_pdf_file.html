@@ -1,10 +1,22 @@
 <!-- templates/upload_pdf_file.html -->
+<style>
+  .hidden {
+    display: none;
+  }
+</style>
 {% extends 'base.html' %} {% block container %}
-<div class="classes_uploadpdf">
-  <h2>Upload PDF File</h2>
-  <form method="post" enctype="multipart/form-data">
-    {% csrf_token %} {{ form.as_p }}
-    <button type="submit" class="btn btn-primary btn-sm">Upload</button>
-  </form>
+<div class="card__upload-pdf">
+  <div class="card-header">Incarca PDF</div>
+  <div class="card-body">
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %} {% for field in form %}
+      <div class="form-group {% if field.name == 'course' %}hidden{% endif %}">
+        {{field}}
+      </div>
+      {% endfor %}
+      <br />
+      <button type="submit" class="btn btn-primary btn-sm">UPLOAD</button>
+    </form>
+  </div>
 </div>
 {% endblock %}

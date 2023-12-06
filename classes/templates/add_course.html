@@ -1,13 +1,24 @@
 <!-- add_course.html -->
+<style>
+  .hidden {
+    display: none;
+  }
+</style>
 {% extends 'base.html' %} {% block container %}
-
-<h2>Add New Course</h2>
-
-<form method="post" action="{% url 'add_course' class_id %}">
-  {% csrf_token %} {{ form.as_p }}
-  <button type="submit" class="btn btn-primary btn-sm">Add Course</button>
-</form>
-
-<a href="{% url 'course_list' class_id %}">Back to Course List</a>
-
+<div class="card__add-course">
+  <div class="card-header">Adauga curs</div>
+  <div class="card-body">
+    <form method="post" action="{% url 'add_course' class_id %}">
+      {% csrf_token %} {% for field in form %}
+      <div
+        class="form-group {% if field.name == 'my_class' %}hidden{% endif %}"
+      >
+        {{field}}
+      </div>
+      {% endfor %}
+      <br />
+      <button type="submit" class="btn btn-primary btn-sm">ADD</button>
+    </form>
+  </div>
+</div>
 {% endblock %}

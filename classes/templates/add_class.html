@@ -1,9 +1,15 @@
+<!-- add_class.html -->
 {% extends 'base.html' %} {% block container %}
-
-<h2>Add a New Class</h2>
-<form method="post" action="{% url 'add_class' %}">
-  {% csrf_token %} {{ form.as_p }}
-  <button type="submit" class="btn btn-primary btn-sm">Add Class</button>
-</form>
-
+<div class="card__add-class">
+  <div class="card-header">Adauga clasa</div>
+  <div class="card-body">
+    <form method="post" action="{% url 'add_class' %}">
+      {% csrf_token %} {% for field in form %}
+      <div class="form-group">{{ field }}</div>
+      {% endfor %}
+      <br />
+      <button type="submit" class="btn btn-primary btn-sm">ADD</button>
+    </form>
+  </div>
+</div>
 {% endblock %}
