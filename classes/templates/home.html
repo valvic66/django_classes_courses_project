@@ -41,7 +41,13 @@
 {% extends 'base.html' %} {% block container %}
 
 <header class="home__header">
-  <h2 class="home__header">Bine ați venit pe Pagina mea de Matematică!</h2>
+  {% if user.is_authenticated %}
+  <h2 class="home__header">
+    Bine ai venit {{ user.username }} pe Pagina mea de Matematică!
+  </h2>
+  {% else %}
+  <h2 class="home__header">Bine ai venit pe Pagina mea de Matematică!</h2>
+  {% endif %}
 </header>
 
 <section class="home__section">

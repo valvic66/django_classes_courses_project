@@ -2,12 +2,70 @@
 
 from django.views.generic import ListView
 from .models import MyClass, Course, PDFFile
-
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from .models import PDFFile
-from .forms import PDFFileForm, AddClassForm, AddCourse
+from .forms import PDFFileForm, AddClassForm, AddCourse, RegisterForm, LoginForm
+from django.contrib.auth.models import auth
+from django.contrib.auth import login, authenticate, logout
+from django.utils.decorators import method_decorator
+from django.urls import reverse
 
+class RegisterView(View):
+    template_name = 'register.html'
+
+    def get(self, request):
+        form = RegisterForm()
+
+        return render(request, self.template_name, {'registerform': form})
+
+    def post(self, request):
+        form = RegisterForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            return redirect('login_view')
+        
+        context = {'registerform': form}
+
+        return render(request, self.template_name, context=context)
+    
+class LogoutView(View):
+    def get(self, request):
+        auth.logout(request)
+
+        return redirect('login_view')    
+
+class LoginView(View):
+    template_name = 'login.html'
+
+    def get(self, request):
+        form = LoginForm()
+
+        return render(request, self.template_name, {'loginform': form})
+
+    def post(self, request):
+        form = LoginForm(request, data=request.POST)
+
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+
+            user = authenticate(request, username=username, password=password)
+
+            if user is not None:
+                login(request, user)
+
+                return redirect('home_view')
+            else:
+                return render(request, self.template_name, {'loginform': form, 'error': 'Invalid username or password'})
+
+        context = {'loginform': form}
+
+        return render(request, self.template_name, context=context)
+
+@method_decorator(login_required(login_url='login_view'), name='dispatch')
 class HomeView(ListView):
     template_name = 'home.html'
 
