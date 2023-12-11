@@ -2,7 +2,7 @@
 
 from django.urls import path
 from django.contrib import admin
-from .views import MyClassListView, CourseListView, PDFFileListView, UploadPDFFileView, HomeView, AddClassView, AddCourseView, DeleteClassView, DeleteCourseView, DeletePDFFileView, RegisterView, LoginView, LogoutView
+from .views import MyClassListView, CourseListView, PDFFileListView, UploadPDFFileView, HomeView, AddClassView, AddCourseView, DeleteClassView, DeleteCourseView, DeletePDFFileView, RegisterView, LoginView, LogoutView, ContactView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -19,4 +19,5 @@ urlpatterns = [
     path('class/<int:class_id>/course/<int:course_id>/all_pdfs/', PDFFileListView.as_view(), name='pdf_list'),
     path('class/<int:class_id>/course/<int:course_id>/pdf/<int:pdf_id>/delete/', DeletePDFFileView.as_view(), name='delete_pdf_file'),
     path('class/<int:class_id>/courses/<int:course_id>/upload-pdf/', UploadPDFFileView.as_view(), name='upload_pdf_file'),
+    path('contact/', ContactView.as_view(), name='contact_view'),
 ]

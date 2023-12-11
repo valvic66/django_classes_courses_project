@@ -76,6 +76,13 @@ class HomeView(ListView):
         return render(request, self.template_name,
             # {'is_admin': is_admin, 'is_guest': is_guest}
         )
+    
+class ContactView(ListView):
+    template_name = 'contact.html'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name)
+    
 
 class MyClassListView(ListView):
     model = MyClass
