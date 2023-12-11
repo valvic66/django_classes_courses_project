@@ -42,7 +42,7 @@
             action="{% url 'delete_class' class_id=my_class.id %}"
             class="delete-form"
           >
-            {% csrf_token %}
+            {% csrf_token %} {% if user.is_authenticated and user.is_staff %}
             <button
               type="submit"
               style="outline: 0; border: 0; background-color: transparent"
@@ -59,6 +59,7 @@
                 />
               </svg>
             </button>
+            {% endif %}
           </form>
         </td>
       </tr>
@@ -67,7 +68,8 @@
   </table>
 </div>
 
+{% if user.is_authenticated and user.is_staff %}
 <form method="get" action="{% url 'add_class' %}">
   <button type="submit" class="btn btn-primary btn-sm">Adauga Clasa</button>
 </form>
-{% endblock %}
+{% endif %} {% endblock %}

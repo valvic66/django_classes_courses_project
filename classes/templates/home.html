@@ -38,12 +38,20 @@
   }
 </style>
 
-{% extends 'base.html' %} {% block container %}
+{% extends 'base.html' %} {% block container %} {% if user.is_staff %}
+<p>This user is an admin.</p>
+{% else %}
+<p>This user is not an admin.</p>
+{% endif %} {% if not user.is_authenticated %}
+<p>This user is a guest.</p>
+{% endif %}
 
 <header class="home__header">
   {% if user.is_authenticated %}
   <h2 class="home__header">
-    Bine ai venit {{ user.username }} pe Pagina mea de Matematică!
+    Bine ai venit
+    <span style="color: blue; font-weight: 700">{{ user.username }}</span>
+    pe Pagina mea de Matematică!
   </h2>
   {% else %}
   <h2 class="home__header">Bine ai venit pe Pagina mea de Matematică!</h2>

@@ -24,7 +24,7 @@
     }
   </style>
   <body>
-    {% block navbar %} {% include "navbar.html" %} {% endblock %}
+    {% if user.is_authenticated %} {% include "navbar.html" %} {% endif %}
     <div class="container classes__container">
       {% block container %}{% endblock %}
     </div>

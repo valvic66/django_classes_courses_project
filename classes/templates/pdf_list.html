@@ -4,10 +4,11 @@
     display: flex;
     align-items: baseline; /* Align items based on their baseline */
     gap: 10px; /* Adjust the spacing between class title and delete form */
+    width: 100%;
   }
 
   .delete-form {
-    margin-right: 10px; /* Add some additional spacing if needed */
+    margin-bottom: 0;
     text-align: right;
   }
 
@@ -55,7 +56,7 @@
             action="{% url 'delete_pdf_file' class_id=class_id course_id=course_id pdf_id=pdf_file.id %}"
             class="delete-form"
           >
-            {% csrf_token %}
+            {% csrf_token %} {% if user.is_authenticated and user.is_staff %}
             <button
               type="submit"
               style="outline: 0; border: 0; background-color: transparent"
@@ -72,6 +73,7 @@
                 />
               </svg>
             </button>
+            {% endif %}
           </form>
         </td>
       </tr>
@@ -79,10 +81,11 @@
     </tbody>
   </table>
 </div>
+{% if user.is_authenticated and user.is_staff %}
 <form
   method="get"
   action="{% url 'upload_pdf_file' class_id=class_id course_id=course_id %}"
 >
   <button type="submit" class="btn btn-primary btn-sm">Incarca PDF</button>
 </form>
-{% endblock %}
+{% endif %} {% endblock %}

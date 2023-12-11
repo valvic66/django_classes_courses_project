@@ -70,7 +70,12 @@ class HomeView(ListView):
     template_name = 'home.html'
 
     def get(self, request, *args, **kwargs):
-        return render(request, self.template_name)
+        # is_admin = request.user.is_staff
+        # is_guest = not request.user.is_authenticated
+
+        return render(request, self.template_name,
+            # {'is_admin': is_admin, 'is_guest': is_guest}
+        )
 
 class MyClassListView(ListView):
     model = MyClass
