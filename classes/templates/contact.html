@@ -3,24 +3,24 @@
 {% extends 'base.html' %} {% block container %}
 <div class="container mt-5">
   <div class="row">
-    <div class="col-md-4">
-      <!-- Teacher Image -->
+    <div class="col-md-4 mb-3 mb-md-0">
+      {% load static %}
       <img
-        src="teacher_adrian_munteanu.jpg"
+        src="{% static 'male-placeholder.jpg' %}"
         alt="Munteanu Adrian"
-        class="img-fluid rounded-circle"
+        class="img-fluid"
       />
     </div>
     <div class="col-md-8">
       <!-- Teacher Information -->
       <h2>Munteanu Adrian</h2>
       <p>
-        Welcome to my contact page! If you need any assistance or have
-        questions, feel free to reach out to me. I'm here to help!
+        Bine ați venit pe pagina mea de contact! Dacă aveți nevoie de asistență
+        sau aveți întrebări, nu ezitați să mă contactați. Sunt aici să vă ajut!
       </p>
       <ul>
-        <li><strong>Email:</strong> adrian.munteanu@example.com</li>
-        <li><strong>Phone:</strong> +123 456 7890</li>
+        <li><strong>Email:</strong> adrian.munteanu@test.com</li>
+        <li><strong>Phone:</strong> +40 723 xxx</li>
       </ul>
     </div>
   </div>

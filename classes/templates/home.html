@@ -38,13 +38,15 @@
   }
 </style>
 
-{% extends 'base.html' %} {% block container %} {% if user.is_staff %}
+{% extends 'base.html' %} {% block container %}
+
+<!-- {% if user.is_staff %}
 <p>This user is an admin.</p>
 {% else %}
 <p>This user is not an admin.</p>
 {% endif %} {% if not user.is_authenticated %}
 <p>This user is a guest.</p>
-{% endif %}
+{% endif %} -->
 
 <header class="home__header">
   {% if user.is_authenticated %}
@@ -63,7 +65,7 @@
   <img
     src="{% static 'matematica_overview.jpg' %}"
     alt="Matematica overview"
-    class="math-overview"
+    class="math-overview image-fluid"
   />
   <p class="justified-text">
     Această pagină vă oferă informații și resurse bogate legate de matematică,
