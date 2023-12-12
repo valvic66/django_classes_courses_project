@@ -12,6 +12,7 @@ from django.contrib.auth import login, authenticate, logout
 from django.utils.decorators import method_decorator
 from django.urls import reverse
 
+@method_decorator(login_required(login_url='login_view'), name='dispatch')
 class RegisterView(View):
     template_name = 'register.html'
 
@@ -30,7 +31,8 @@ class RegisterView(View):
         context = {'registerform': form}
 
         return render(request, self.template_name, context=context)
-    
+
+@method_decorator(login_required(login_url='login_view'), name='dispatch')    
 class LogoutView(View):
     def get(self, request):
         auth.logout(request)
@@ -76,14 +78,15 @@ class HomeView(ListView):
         return render(request, self.template_name,
             # {'is_admin': is_admin, 'is_guest': is_guest}
         )
-    
+
+@method_decorator(login_required(login_url='login_view'), name='dispatch')    
 class ContactView(ListView):
     template_name = 'contact.html'
 
     def get(self, request, *args, **kwargs):
         return render(request, self.template_name)
     
-
+@method_decorator(login_required(login_url='login_view'), name='dispatch')
 class MyClassListView(ListView):
     model = MyClass
     template_name = 'class_list.html'
@@ -105,7 +108,8 @@ class AddClassView(View):
             form.save()
             return redirect('class_list')  # Change this to the appropriate URL name
         return render(request, self.template_name, {'form': form})
-    
+
+@method_decorator(login_required(login_url='login_view'), name='dispatch')
 class DeleteClassView(View):
     def post(self, request, class_id):
         my_class = get_object_or_404(MyClass, id=class_id)
@@ -125,6 +129,7 @@ class DeleteClassView(View):
         # Redirect to the classes page or any other appropriate page
         return redirect('class_list')  # Change this to the appropriate URL name
 
+@method_decorator(login_required(login_url='login_view'), name='dispatch')
 class CourseListView(ListView):
     model = Course
     template_name = 'course_list.html'
@@ -140,7 +145,8 @@ class CourseListView(ListView):
         context['class_id'] = class_id
         context['class_name'] = MyClass.objects.get(id=class_id).name
         return context
-    
+
+@method_decorator(login_required(login_url='login_view'), name='dispatch')    
 class AddCourseView(View):
     template_name = 'add_course.html'  # Create this template
 
@@ -155,7 +161,8 @@ class AddCourseView(View):
             return redirect('course_list', class_id=class_id)
         
         return render(request, self.template_name, {'form': form, 'class_id': class_id})
-    
+
+@method_decorator(login_required(login_url='login_view'), name='dispatch')    
 class DeleteCourseView(View):
     def post(self, request, class_id, course_id):
         course = get_object_or_404(Course, id=course_id)
@@ -172,6 +179,7 @@ class DeleteCourseView(View):
         # Redirect to the course list page or any other appropriate page
         return redirect('course_list', class_id=class_id)  # Change this to the appropriate URL name
 
+@method_decorator(login_required(login_url='login_view'), name='dispatch')
 class PDFFileListView(ListView):
     model = PDFFile
     template_name = 'pdf_list.html'
@@ -192,6 +200,7 @@ class PDFFileListView(ListView):
         context['form'] = PDFFileForm(initial={'course': course_id})
         return context
 
+@method_decorator(login_required(login_url='login_view'), name='dispatch')
 class DeletePDFFileView(View):
     def post(self, request, class_id, course_id, pdf_id):
         pdf_file = get_object_or_404(PDFFile, id=pdf_id)
@@ -205,6 +214,7 @@ class DeletePDFFileView(View):
         # Redirect to the PDF list page or any other appropriate page
         return redirect('pdf_list', class_id=class_id, course_id=course_id)    
 
+@method_decorator(login_required(login_url='login_view'), name='dispatch')
 class UploadPDFFileView(View):
     template_name = 'upload_pdf_file.html'
 
