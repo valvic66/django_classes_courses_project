@@ -1,5 +1,40 @@
-<h1>Register</h1>
-<form method="post" autocomplete="off">
-  {% csrf_token %} {{ registerform.as_p }}
-  <input type="submit" value="Register" />
-</form>
+{% extends 'base.html' %} {% block container %}
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="text-center">Register</h3>
+        </div>
+        <div class="card-body">
+          <form method="post" autocomplete="off">
+            {% csrf_token %}
+
+            <!-- Replace {{ registerform.as_p }} with individual form fields -->
+            <div class="mb-3">
+              <label for="username" class="form-label">Username</label>
+              {{ registerform.username }}
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              {{ registerform.email }}
+            </div>
+            <div class="mb-3">
+              <label for="password1" class="form-label">Password</label>
+              {{ registerform.password1 }}
+            </div>
+            <div class="mb-3">
+              <label for="password2" class="form-label">Confirm Password</label>
+              {{ registerform.password2 }}
+            </div>
+
+            <!-- Additional form fields can be added if needed -->
+
+            <button type="submit" class="btn btn-primary">Register</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
