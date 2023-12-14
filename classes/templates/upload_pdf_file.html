@@ -15,7 +15,12 @@
       </div>
       {% endfor %}
       <br />
-      <button type="submit" class="btn btn-primary btn-sm">UPLOAD</button>
+      <button type="submit" class="btn btn-primary btn-sm">Incarca</button>
+      <a
+        class="btn btn-primary btn-sm"
+        href="{% url 'pdf_list' class_id course_id %}"
+        >Inapoi</a
+      >
     </form>
   </div>
 </div>
